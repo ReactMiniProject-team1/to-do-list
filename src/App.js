@@ -1,10 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
-import ToDos from "./components/ToDos";
+import ToDo from "./components/ToDo";
 
 function App() {
   const [input, setInput] = useState("");
-  const [toDos, setToDo] = useState([]);
+  const [toDos, setToDo] = useState(
+    Object.entries(localStorage).map(([key, value]) => ({
+      id: key,
+      todo: value,
+      done: false,
+    }))
+  );
 
   const inputRef = useRef("");
 
@@ -18,12 +24,29 @@ function App() {
   };
 
   const addToList = () => {
-    let newToDo = input;
+    const key = Math.random().toString(16).substring(0, 5);
+    let newToDo = { id: key, todo: input, done: false };
     setToDo([...toDos, newToDo]);
+    localStorage.setItem(key, input);
     setInput("");
     inputRef.current.focus();
   };
 
+  const clearAll = () => {
+    setToDo([]);
+    localStorage.clear();
+  };
+
+  const isDone = (id) => {
+    let newtoDos = toDos.map((each) => {
+      if (each.id === id) {
+        return { ...each, isdone: true };
+      }
+      return each;
+    });
+
+    setToDo(newtoDos);
+  };
   return (
     <div className="App">
       <header>
@@ -42,11 +65,22 @@ function App() {
           Add
         </button>
       </div>
-      <div>
-        <ul>
-          <ToDos toDos={toDos} />
-        </ul>
-      </div>
+      <ul>
+        {toDos.map((each) => (
+          <ToDo
+            todo={each.todo}
+            isdone={each.done}
+            key={each.id}
+            isDone={isDone}
+          />
+        ))}
+      </ul>
+      <button
+        onClick={clearAll}
+        style={{ visibility: toDos.length === 0 ? "hidden" : "visible" }}
+      >
+        Clear All
+      </button>
     </div>
   );
 }
