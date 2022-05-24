@@ -1,21 +1,31 @@
-import { useState } from "react";
+import React from "react";
 
-function ToDo({ todo, isdone, key, isDone }) {
+function ToDo({ toDo, onRemove, onCrossOut }) {
+  const { id, text, isDone } = toDo;
+
   return (
-    <li>
+    <div className="toDoItems">
       <span
         style={{
-          textDecoration: isdone ? "line-through" : "none",
-          color: isdone ? "gray" : "balck",
+          textDecoration: isDone ? "line-through" : "none",
+          color: isDone ? "gray" : "black",
         }}
-        onClick={() => isDone(key)}
       >
-        {todo}
+        {text}
       </span>
-      <button style={{ background: "none", border: "none", cursor: "pointer" }}>
+      <button
+        onClick={() => onCrossOut(id)}
+        style={{ background: "none", border: "none", cursor: "pointer" }}
+      >
+        ✅
+      </button>
+      <button
+        onClick={() => onRemove(id)}
+        style={{ background: "none", border: "none", cursor: "pointer" }}
+      >
         ❌
       </button>
-    </li>
+    </div>
   );
 }
 

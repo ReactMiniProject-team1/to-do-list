@@ -1,16 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import React from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import "./App.css";
-import ToDo from "./components/ToDo";
+import ToDoList from "./components/ToDoList";
+import uuid from "react-uuid";
 
 function App() {
   const [input, setInput] = useState("");
-  const [toDos, setToDo] = useState(
-    Object.entries(localStorage).map(([key, value]) => ({
-      id: key,
-      todo: value,
-      done: false,
-    }))
-  );
+  const [toDos, setToDos] = useState(JSON.parse(localStorage.getItem("todo")));
 
   const inputRef = useRef("");
 
@@ -23,36 +19,54 @@ function App() {
     setInput(value);
   };
 
-  const addToList = () => {
-    const key = Math.random().toString(16).substring(0, 5);
-    let newToDo = { id: key, todo: input, done: false };
-    setToDo([...toDos, newToDo]);
-    localStorage.setItem(key, input);
-    setInput("");
-    inputRef.current.focus();
+  const checkValidity = (text) => {
+    return text !== "";
+  };
+
+  const addToList = (e) => {
+    e.preventDefault();
+    const validity = checkValidity(input);
+    if (validity) {
+      const key = uuid();
+      let newToDo = { id: key, text: input, isDone: false };
+      setToDos([...toDos, newToDo]);
+      setInput("");
+      inputRef.current.focus();
+    }
   };
 
   const clearAll = () => {
-    setToDo([]);
-    localStorage.clear();
+    setToDos([]);
   };
 
-  const isDone = (id) => {
-    let newtoDos = toDos.map((each) => {
-      if (each.id === id) {
-        return { ...each, isdone: true };
-      }
-      return each;
-    });
+  const onRemove = useCallback(
+    (id) => {
+      setToDos(toDos.filter((todo) => todo.id !== id));
+    },
+    [toDos]
+  );
 
-    setToDo(newtoDos);
-  };
+  const onCrossOut = useCallback(
+    (id) => {
+      setToDos(
+        toDos.map((todo) =>
+          todo.id === id ? { ...todo, isDone: !todo.isDone } : { ...todo }
+        )
+      );
+    },
+    [toDos]
+  );
+
+  useEffect(() => {
+    localStorage.setItem("todo", JSON.stringify(toDos));
+  }, [toDos]);
+
   return (
     <div className="App">
       <header>
         <h1>To Do List</h1>
       </header>
-      <div className="input">
+      <form className="input">
         <input
           name="todo"
           type="text"
@@ -64,18 +78,15 @@ function App() {
         <button className="addBtn" onClick={addToList}>
           Add
         </button>
-      </div>
-      <ul>
-        {toDos.map((each) => (
-          <ToDo
-            todo={each.todo}
-            isdone={each.done}
-            key={each.id}
-            isDone={isDone}
-          />
-        ))}
-      </ul>
+      </form>
+      <ToDoList
+        className="toDoList"
+        toDos={toDos}
+        onRemove={onRemove}
+        onCrossOut={onCrossOut}
+      />
       <button
+        className="clearAllBtn"
         onClick={clearAll}
         style={{ visibility: toDos.length === 0 ? "hidden" : "visible" }}
       >
