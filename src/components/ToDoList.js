@@ -3,16 +3,18 @@ import ToDo from "./ToDo";
 
 function ToDoList({ toDos, onRemove, onCrossOut }) {
   return (
-    <div>
-      {toDos.map((each) => (
-        <ToDo
-          key={each.id}
-          toDo={each}
-          onRemove={onRemove}
-          onCrossOut={onCrossOut}
-        />
-      ))}
-    </div>
+    <>
+      <div>
+        {toDos.map((each) => (
+          <ToDo
+            key={each.id}
+            toDo={each}
+            onRemove={onRemove}
+            onCrossOut={onCrossOut}
+          />
+        ))}
+      </div>
+    </>
   );
 }
 

@@ -1,16 +1,51 @@
 .App{
-  text-align: center;
+  width: 512px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 6rem;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+header{
+  background-color: lemonchiffon;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .input{
-  margin-bottom: 20px;
+  display:flex;
+  outline: none;
+  border:none;
+  padding:0.5rem;
+  font-size:1.125rem;
+  line-height: 1.5;
+  flex:1;
+  background-color: white;
 }
 
-.toDoList{
-  text-align: left;
+.addBtn{
+  border:none;
+  background-color: white;
+  font-size: large;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.1s background ease-in;
 }
 
-button{
+.addBtn:hover{
+  transition: 1 11.125rem;
+}
+
+.content{
+  background-color: white;
+  padding-left: 10px;
+}
+
+.clearAllBtn{
   margin-left: 10px;
   padding: 4px 4px 4px 4px;
   border: none;

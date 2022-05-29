@@ -1,4 +1,5 @@
 import React from "react";
+import { MdDelete, MdCheckBox } from "react-icons/md";
 
 function ToDo({ toDo, onRemove, onCrossOut }) {
   const { id, text, isDone } = toDo;
@@ -17,13 +18,19 @@ function ToDo({ toDo, onRemove, onCrossOut }) {
         onClick={() => onCrossOut(id)}
         style={{ background: "none", border: "none", cursor: "pointer" }}
       >
-        ✅
+        <MdCheckBox />
       </button>
       <button
         onClick={() => onRemove(id)}
-        style={{ background: "none", border: "none", cursor: "pointer" }}
+        style={{
+          size: "",
+          background: "none",
+          border: "none",
+          color: "black",
+          cursor: "pointer",
+        }}
       >
-        ❌
+        <MdDelete />
       </button>
     </div>
   );
