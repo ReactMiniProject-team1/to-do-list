@@ -1,18 +1,14 @@
 import React from "react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "../App.css";
 import ToDoList from "../components/ToDoList";
-import { MdPostAdd } from "react-icons/md";
+import InputField from "../components/InputField";
 
 function ToDoPage() {
   const [input, setInput] = useState("");
-  const [toDos, setToDos] = useState(JSON.parse(localStorage.getItem("todo")));
-
-  const inputRef = useRef("");
-
-  useEffect(() => {
-    inputRef.current.focus();
-  }, []);
+  const [toDos, setToDos] = useState(
+    JSON.parse(localStorage.getItem("todo")) || []
+  );
 
   const getInput = (e) => {
     const value = e.target.value;
@@ -31,7 +27,7 @@ function ToDoPage() {
       let newToDo = { id: key, text: input, isDone: false };
       setToDos([...toDos, newToDo]);
       setInput("");
-      inputRef.current.focus();
+      //inputRef.current.focus();
     }
   };
 
@@ -48,11 +44,10 @@ function ToDoPage() {
 
   const onCrossOut = useCallback(
     (id) => {
-      setToDos(
-        toDos.map((todo) =>
-          todo.id === id ? { ...todo, isDone: !todo.isDone } : { ...todo }
-        )
+      const newTodo = toDos.map((todo) =>
+        todo.id === id ? { ...todo, isDone: !todo.isDone } : { ...todo }
       );
+      setToDos(newTodo);
     },
     [toDos]
   );
@@ -66,19 +61,7 @@ function ToDoPage() {
       <header>
         <h1>To Do List</h1>
       </header>
-      <form className="input">
-        <input
-          name="todo"
-          type="text"
-          placeholder="type your to-do"
-          value={input}
-          onChange={getInput}
-          ref={inputRef}
-        />
-        <button className="addBtn" onClick={addToList}>
-          <MdPostAdd />
-        </button>
-      </form>
+      <InputField input={input} addToList={addToList} getInput={getInput} />
       <div className="content">
         <ToDoList
           className="toDoList"
