@@ -11,7 +11,8 @@ export default function RemoveButtons() {
       <button
         className="clearAllBtn"
         onClick={() => {
-          dispatch(removeAll());
+          const res = window.confirm("Are you sure to remove ALL?");
+          if (res) dispatch(removeAll());
         }}
         style={{ visibility: toDos.length === 0 ? "hidden" : "visible" }}
       >
@@ -24,7 +25,7 @@ export default function RemoveButtons() {
         }}
         style={{ visibility: toDos.length === 0 ? "hidden" : "visible" }}
       >
-        Remove Completed Task
+        Remove Completed Tasks
       </button>
     </>
   );
