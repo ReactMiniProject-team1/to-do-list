@@ -17,8 +17,10 @@ export default function InputField() {
   const addToList = (e) => {
     e.preventDefault();
     if (text) {
-      dispatch(getText({ text: text }));
+      //dispatch(getText({ text: text }));
       dispatch(create({ text: text }));
+      setText("");
+      inputRef.current.focus();
     }
   };
 

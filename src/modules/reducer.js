@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import uuid from "react-uuid";
 
 const initialState = {
   input: "",
@@ -14,13 +15,21 @@ export const todoSlice = createSlice({
     },
     create: (state, action) => {
       state.toDos.push({
-        id: Math.random().toString(36).slice(2, 9),
+        id: uuid(),
         text: action.payload.text,
         isDone: false,
       });
     },
     remove: (state, action) => {
       state.toDos = state.toDos.filter((todo) => todo.id !== action.payload.id);
+    },
+    update: (state, action) => {
+      state.toDos.map((todo) => {
+        if (todo.id === action.payload.id) {
+          todo.text = action.payload.text;
+        }
+        return todo;
+      });
     },
     markDone: (state, action) => {
       state.toDos.map((todo) => {
@@ -36,7 +45,7 @@ export const todoSlice = createSlice({
   },
 });
 
-export const { getText, create, remove, markDone, removeAll } =
+export const { update, getText, create, remove, markDone, removeAll } =
   todoSlice.actions;
 
 export default todoSlice.reducer;

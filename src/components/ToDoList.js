@@ -8,10 +8,9 @@ function ToDoList() {
   return (
     <>
       <div>
-        {toDos.map((each) => {
-          console.log("why..?rerener?");
-          return <ToDo key={each.id} toDo={each} />;
-        })}
+        {toDos.map((toDo) => (
+          <ToDo key={toDo.id} toDo={toDo} />
+        ))}
       </div>
     </>
   );

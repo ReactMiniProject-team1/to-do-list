@@ -1,4 +1,4 @@
-.App{
+.App {
   width: 512px;
   margin-left: auto;
   margin-right: auto;
@@ -7,7 +7,7 @@
   overflow: hidden;
 }
 
-header{
+header {
   background-color: lemonchiffon;
   height: 4rem;
   display: flex;
@@ -15,19 +15,20 @@ header{
   justify-content: center;
 }
 
-.input{
-  display:flex;
+.input {
+  display: flex;
   outline: none;
-  border:none;
-  padding:0.5rem;
-  font-size:1.125rem;
+  border: none;
+  padding: 0.5rem;
+  font-size: 1.125rem;
   line-height: 1.5;
-  flex:1;
+  flex: 1;
   background-color: white;
 }
 
-.addBtn{
-  border:none;
+.addBtn {
+  border: none;
+  margin-left: 0.5rem;
   background-color: white;
   font-size: large;
   display: flex;
@@ -36,21 +37,29 @@ header{
   transition: 0.1s background ease-in;
 }
 
-.addBtn:hover{
-  transition: 1 11.125rem;
+.addBtn:hover {
+  transform: scale(1.1);
 }
 
-.content{
+.btn:hover {
+  color: rgb(195, 54, 54);
+}
+
+.content {
   background-color: white;
   padding-left: 10px;
 }
 
-.clearAllBtn{
+.clearAllBtn {
   margin-left: 10px;
   padding: 4px 4px 4px 4px;
   border: none;
   border-radius: 5px;
   background-color: rgb(87, 174, 190);
-  color:white;
+  color: white;
   cursor: pointer;
+}
+
+.toDoItems {
+  margin-bottom: 0.5rem;
 }

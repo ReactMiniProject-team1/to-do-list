@@ -1,7 +1,7 @@
 import React from "react";
-import { useCallback, useEffect, useState } from "react";
+//import { useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux/es/exports";
-import { create, removeAll } from "../modules/reducer";
+import { removeAll } from "../modules/reducer";
 import "../App.css";
 import ToDoList from "../components/ToDoList";
 import InputField from "../components/InputField";
@@ -9,18 +9,6 @@ import InputField from "../components/InputField";
 function ToDoPage() {
   const toDos = useSelector((state) => state.todoSlice.toDos);
   const dispatch = useDispatch();
-
-  // const [toDos, setToDos] = useState(
-  //   JSON.parse(localStorage.getItem("todo")) || []
-  // );
-
-  const clearAll = () => {
-    dispatch(removeAll());
-  };
-
-  // useEffect(() => {
-  //   localStorage.setItem("todo", JSON.stringify(toDos));
-  // }, [toDos]);
 
   return (
     <div className="App">
@@ -32,7 +20,9 @@ function ToDoPage() {
         <ToDoList className="toDoList" />
         <button
           className="clearAllBtn"
-          onClick={clearAll}
+          onClick={() => {
+            dispatch(removeAll());
+          }}
           style={{ visibility: toDos.length === 0 ? "hidden" : "visible" }}
         >
           Clear All
