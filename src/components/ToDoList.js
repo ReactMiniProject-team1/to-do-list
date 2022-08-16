@@ -1,18 +1,17 @@
 import React from "react";
 import ToDo from "./ToDo";
+import { useSelector } from "react-redux/es/exports";
 
-function ToDoList({ toDos, onRemove, onCrossOut }) {
+function ToDoList() {
+  const toDos = useSelector((state) => state.todoSlice.toDos);
+
   return (
     <>
       <div>
-        {toDos.map((each) => (
-          <ToDo
-            key={each.id}
-            toDo={each}
-            onRemove={onRemove}
-            onCrossOut={onCrossOut}
-          />
-        ))}
+        {toDos.map((each) => {
+          console.log("why..?rerener?");
+          return <ToDo key={each.id} toDo={each} />;
+        })}
       </div>
     </>
   );

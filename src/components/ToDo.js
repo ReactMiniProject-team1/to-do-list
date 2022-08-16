@@ -1,7 +1,10 @@
 import React from "react";
 import { MdDelete, MdCheckBox } from "react-icons/md";
+import { useDispatch } from "react-redux";
+import { remove, markDone } from "../modules/reducer";
 
-function ToDo({ toDo, onRemove, onCrossOut }) {
+function ToDo({ toDo }) {
+  const dispatch = useDispatch();
   const { id, text, isDone } = toDo;
 
   return (
@@ -15,13 +18,13 @@ function ToDo({ toDo, onRemove, onCrossOut }) {
         {text}
       </span>
       <button
-        onClick={() => onCrossOut(id)}
+        onClick={() => dispatch(markDone({ id: id }))}
         style={{ background: "none", border: "none", cursor: "pointer" }}
       >
         <MdCheckBox />
       </button>
       <button
-        onClick={() => onRemove(id)}
+        onClick={() => dispatch(remove({ id: id }))}
         style={{
           size: "",
           background: "none",

@@ -1,74 +1,35 @@
 import React from "react";
 import { useCallback, useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux/es/exports";
+import { create, removeAll } from "../modules/reducer";
 import "../App.css";
 import ToDoList from "../components/ToDoList";
 import InputField from "../components/InputField";
 
 function ToDoPage() {
-  const [input, setInput] = useState("");
-  const [toDos, setToDos] = useState(
-    JSON.parse(localStorage.getItem("todo")) || []
-  );
+  const toDos = useSelector((state) => state.todoSlice.toDos);
+  const dispatch = useDispatch();
 
-  const getInput = (e) => {
-    const value = e.target.value;
-    setInput(value);
-  };
-
-  const checkValidity = (text) => {
-    return text !== "";
-  };
-
-  const addToList = (e) => {
-    e.preventDefault();
-    const validity = checkValidity(input);
-    if (validity) {
-      const key = Math.random().toString(36).slice(2, 9);
-      let newToDo = { id: key, text: input, isDone: false };
-      setToDos([...toDos, newToDo]);
-      setInput("");
-      //inputRef.current.focus();
-    }
-  };
+  // const [toDos, setToDos] = useState(
+  //   JSON.parse(localStorage.getItem("todo")) || []
+  // );
 
   const clearAll = () => {
-    setToDos([]);
+    dispatch(removeAll());
   };
 
-  const onRemove = useCallback(
-    (id) => {
-      setToDos(toDos.filter((todo) => todo.id !== id));
-    },
-    [toDos]
-  );
-
-  const onCrossOut = useCallback(
-    (id) => {
-      const newTodo = toDos.map((todo) =>
-        todo.id === id ? { ...todo, isDone: !todo.isDone } : { ...todo }
-      );
-      setToDos(newTodo);
-    },
-    [toDos]
-  );
-
-  useEffect(() => {
-    localStorage.setItem("todo", JSON.stringify(toDos));
-  }, [toDos]);
+  // useEffect(() => {
+  //   localStorage.setItem("todo", JSON.stringify(toDos));
+  // }, [toDos]);
 
   return (
     <div className="App">
       <header>
         <h1>To Do List</h1>
       </header>
-      <InputField input={input} addToList={addToList} getInput={getInput} />
+      <InputField />
       <div className="content">
-        <ToDoList
-          className="toDoList"
-          toDos={toDos}
-          onRemove={onRemove}
-          onCrossOut={onCrossOut}
-        />
+        <ToDoList className="toDoList" />
         <button
           className="clearAllBtn"
           onClick={clearAll}

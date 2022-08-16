@@ -1,14 +1,14 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "./modules/store";
+
 import ToDoPage from "./routes/ToDoPage";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<ToDoPage />} />
-      </Routes>
-    </BrowserRouter>
+    <Provider store={store}>
+      <ToDoPage />;
+    </Provider>
   );
 }
 
