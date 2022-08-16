@@ -1,12 +1,11 @@
 import React, { useRef, useEffect, useState } from "react";
 import { MdPostAdd } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
-import { create, getText } from "../modules/reducer";
+import { useDispatch } from "react-redux";
+import { create } from "../modules/reducer";
 
 export default function InputField() {
   const inputRef = useRef("");
   const [text, setText] = useState("");
-  const input = useSelector((state) => state.input);
   const dispatch = useDispatch();
 
   const getInput = (e) => {
@@ -17,7 +16,6 @@ export default function InputField() {
   const addToList = (e) => {
     e.preventDefault();
     if (text) {
-      //dispatch(getText({ text: text }));
       dispatch(create({ text: text }));
       setText("");
       inputRef.current.focus();

@@ -1,13 +1,14 @@
-import React, { useState } from "react";
-import { MdDelete, MdCheckBox, MdCreate } from "react-icons/md";
+import React, { useState, useRef } from "react";
+import { MdDelete, MdCheckBox, MdCreate, MdStarRate } from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { remove, markDone, update } from "../modules/reducer";
+import { remove, markDone, update, prioritize } from "../modules/reducer";
 
 function ToDo({ toDo }) {
-  const { id, text, isDone } = toDo;
+  const { id, text, isDone, isImportant } = toDo;
 
   const [isEditing, setIsEditing] = useState(false);
   const [editText, setEditText] = useState(text);
+  const inputRef = useRef("");
 
   const dispatch = useDispatch();
 
@@ -22,48 +23,50 @@ function ToDo({ toDo }) {
 
   return (
     <div className="toDoItems">
-      <span
-        style={{
-          display: isEditing ? "none" : "inline",
-          textDecoration: isDone ? "line-through" : "none",
-          color: isDone ? "gray" : "black",
-        }}
-      >
-        {text}
-      </span>
-      <input
-        type="text"
-        value={editText}
-        style={{ display: isEditing ? "inline" : "none" }}
-        onChange={(e) => {
-          setEditText(e.target.value);
-        }}
-      ></input>
       <button
         className="btn"
-        onClick={updateText}
-        style={{ background: "none", border: "none", cursor: "pointer" }}
+        onClick={() => {
+          dispatch(prioritize({ id: id }));
+        }}
+        style={{ color: isImportant !== 100 ? "orange" : "black" }}
       >
+        <MdStarRate />
+      </button>
+      {!isEditing ? (
+        <span
+          style={{
+            textDecoration: isDone ? "line-through" : "none",
+            color: isDone ? "gray" : "black",
+          }}
+        >
+          {text}
+        </span>
+      ) : (
+        <input
+          type="text"
+          value={editText}
+          ref={inputRef}
+          style={{ display: "inline" }}
+          onChange={(e) => {
+            setEditText(e.target.value);
+          }}
+          //edit button 눌렀을 때 이렇게 동작하게 하고 싶은데..
+          onClick={() => {
+            inputRef.current.select();
+          }}
+        ></input>
+      )}
+      <button className="btn" onClick={updateText}>
         <MdCreate />
       </button>
       <button
         className="btn"
         onClick={() => dispatch(markDone({ id: id }))}
-        style={{ background: "none", border: "none", cursor: "pointer" }}
+        disabled={isEditing ? true : false}
       >
         <MdCheckBox />
       </button>
-      <button
-        className="btn"
-        onClick={() => dispatch(remove({ id: id }))}
-        style={{
-          size: "",
-          background: "none",
-          border: "none",
-
-          cursor: "pointer",
-        }}
-      >
+      <button className="btn" onClick={() => dispatch(remove({ id: id }))}>
         <MdDelete />
       </button>
     </div>

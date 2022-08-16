@@ -2,22 +2,21 @@ import { createSlice } from "@reduxjs/toolkit";
 import uuid from "react-uuid";
 
 const initialState = {
-  input: "",
   toDos: [],
 };
+
+let importance = -1000;
 
 export const todoSlice = createSlice({
   name: "todoHandler",
   initialState: initialState,
   reducers: {
-    getText: (state, action) => {
-      state.input = action.payload.text;
-    },
     create: (state, action) => {
       state.toDos.push({
         id: uuid(),
         text: action.payload.text,
         isDone: false,
+        isImportant: 100,
       });
     },
     remove: (state, action) => {
@@ -42,10 +41,34 @@ export const todoSlice = createSlice({
     removeAll: (state) => {
       state.toDos = [];
     },
+    removeDones: (state) => {
+      state.toDos = state.toDos.filter((todo) => !todo.isDone);
+    },
+    prioritize: (state, action) => {
+      state.toDos = state.toDos
+        .map((todo) => {
+          if (todo.id === action.payload.id) {
+            if (todo.isImportant === 100) {
+              todo.isImportant = importance++;
+            } else {
+              todo.isImportant = 100;
+            }
+          }
+          return todo;
+        })
+        .sort((a, b) => a.isImportant - b.isImportant);
+    },
   },
 });
 
-export const { update, getText, create, remove, markDone, removeAll } =
-  todoSlice.actions;
+export const {
+  update,
+  create,
+  remove,
+  markDone,
+  removeAll,
+  removeDones,
+  prioritize,
+} = todoSlice.actions;
 
 export default todoSlice.reducer;
