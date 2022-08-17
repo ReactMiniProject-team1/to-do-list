@@ -3,10 +3,22 @@
 we made our own react to-do-list  
 on `jinju` branch
 
-### `yarn start`
+### installed
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- yarn
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```
+$ npm install --global yarn
+```
+
+- Create project
+
+```
+$ yarn create react-app to-do-list
+```
+
+- libraries
+
+```
+$ yarn add sass classnames react-icons
+```
