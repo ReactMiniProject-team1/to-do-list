@@ -22,3 +22,6 @@ $ yarn create react-app to-do-list
 ```
 $ yarn add sass classnames react-icons
 ```
+
+[React Icons](https://react-icons.github.io/react-icons/)  
+[Google fonts](https://fonts.google.com/)

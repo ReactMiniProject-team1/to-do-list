@@ -3,3 +3,8 @@ body {
   padding: 0;
   background: #344e41;
 }
+
+@font-face {
+  font-family: 'GowunDodum-Regular';
+  src: url('./fonts/GowunDodum-Regular.ttf');
+}
