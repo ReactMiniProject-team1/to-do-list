@@ -1,5 +1,7 @@
+import TodoTemplate from './components/TodoTemplate';
+
 const App = () => {
-  return <div>To Do List</div>;
+  return <TodoTemplate>To Do List</TodoTemplate>;
 };
 
 export default App;
