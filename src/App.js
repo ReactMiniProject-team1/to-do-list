@@ -1,12 +1,7 @@
 import TodoTemplate from './components/TodoTemplate';
-import TodoInsert from './components/TodoInsert';
 
 const App = () => {
-  return (
-    <TodoTemplate>
-      <TodoInsert />
-    </TodoTemplate>
-  );
+  return <TodoTemplate>To Do List</TodoTemplate>;
 };
 
 export default App;
