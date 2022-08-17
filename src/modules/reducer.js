@@ -2,10 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 import uuid from "react-uuid";
 
 const initialState = {
+  importance: -1000,
   toDos: [],
 };
-
-let importance = -1000;
 
 export const todoSlice = createSlice({
   name: "todoHandler",
@@ -49,7 +48,7 @@ export const todoSlice = createSlice({
         .map((todo) => {
           if (todo.id === action.payload.id) {
             if (todo.isImportant === 100) {
-              todo.isImportant = importance++;
+              todo.isImportant = state.importance++;
             } else {
               todo.isImportant = 100;
             }
