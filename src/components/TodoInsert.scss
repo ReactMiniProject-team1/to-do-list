@@ -20,8 +20,8 @@
     background: none;
     outline: none;
     border: none;
-    background: #dad7cd;
-    color: #344e41;
+    background: #5b695b;
+    color: #dad7cd;
     padding-left: 1rem;
     padding-right: 1rem;
     font-size: 1.5rem;
@@ -30,8 +30,8 @@
     cursor: pointer;
     transition: 0.1s background ease-in;
     &:hover {
-      background: #5b695b;
-      color: #dad7cd;
+      background: #333;
+      color: #eee;
     }
   }
 }
