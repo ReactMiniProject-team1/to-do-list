@@ -3,6 +3,8 @@
 we made our own react to-do-list  
 on `jinju` branch
 
+![gif](./to-do-list.gif)
+
 ### installed
 
 - yarn
