@@ -6,7 +6,7 @@ import TodoList from './components/TodoList';
 const App = () => {
   const [todos, setTodos] = useState([]);
 
-  const nextId = useRef();
+  const nextId = useRef(1);
 
   const onInsert = useCallback(
     (text) => {
