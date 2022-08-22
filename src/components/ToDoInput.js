@@ -45,23 +45,15 @@ function ToDoInput({ valueList, setValueList }) {
     inputRef.current.focus();
   };
   // =============================================
-  // 한글 두번 입력됨, 조건식 크게 의미 없음. 최대 골칫거리
+  // 입력창에 엔터 입력시 출력 함수 실행
   // =============================================
   const onKeyDownInput = (e) => {
-    if (e.key === '') {
-      console.log('빈칸')
+    if (e.nativeEvent.isComposing) {
       return;
-    } else if (e.key === 'Return') { 
-      console.log('백스페이스')
-      return;
-    } else if (e.key !== 'Enter') {
-      console.log('엔터아님')
-      return;
-    } else if (e.isComposing) { 
-      console.log('컴포징')
+    } 
+    if (e.key === 'Enter' && e.shiftKey) {
       return;
     } else if (e.key === 'Enter') {
-      e.preventDefault();
       intoTheList(e);
     }
   };
