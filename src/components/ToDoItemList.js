@@ -3,12 +3,6 @@ import styled from "styled-components";
 import ToDoItem from './ToDoItem';
 
 const ToDoListContainer = styled.div`
-  ${'' /* .todo__list-title {
-    font-size: 18px;
-    color: #454b55;
-    padding: 10px;
-  } */}
-
   .todo__list-ul {
     list-style: none;
     display: flex;
@@ -21,7 +15,6 @@ const ToDoListContainer = styled.div`
 function ToDoItemList({ valueList, setValueList, checkedList }) {
   return (
     <ToDoListContainer>
-      {/* <p className='todo__list-title'>{ title }</p> */}
       <ul className="todo__list-ul"> { 
         valueList && valueList.map((todoItem) => {
           if(todoItem.deleted) return null;

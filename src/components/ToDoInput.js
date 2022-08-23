@@ -50,7 +50,10 @@ function ToDoInput({ valueList, setValueList }) {
   const onKeyDownInput = (e) => {
     if (e.nativeEvent.isComposing) {
       return;
-    } 
+    }
+    if (value === '') {
+      return;
+    }
     if (e.key === 'Enter' && e.shiftKey) {
       return;
     } else if (e.key === 'Enter') {
