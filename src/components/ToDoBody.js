@@ -16,7 +16,7 @@ const ToDoBodyContainer = styled.div`
     padding-right: 25px;
     background-color: #f7f7f7;
   }
-  
+
   .todo__item-value-checked {
     margin-left: 1rem;
     margin-right: 1rem;
