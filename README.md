@@ -1,5 +1,5 @@
 # to-do-list
-![](https://github.com/ReactMiniProject-team1/to-do-list/blob/jiyeop/sample.gif)
+![](https://github.com/Yupmac/to-do-list/blob/main/sample.gif)
 
 ## 주요 기능
 1. 날짜 변동 적용 / 월 일 요일 순으로 로컬 시간에 맞춰 표기됨

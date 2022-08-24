@@ -10,8 +10,13 @@ const ToDoBodyContainer = styled.div`
 
   .todo__list-done {
     margin-top: 3rem;
+    margin-left: -25px;
+    margin-right: -25px;
+    padding-left: 25px;
+    padding-right: 25px;
     background-color: #f7f7f7;
   }
+
   .todo__item-value-checked {
     margin-left: 1rem;
     margin-right: 1rem;
@@ -38,7 +43,6 @@ function ToDoBody() {
         {/* 해야할 일 리스트 */}
         <div className='todo__list-yet'>
           <ToDoItemList 
-            // title={ '할 일' }
             valueList={ valueList } 
             setValueList={ setValueList }
             checkedList={false}
@@ -47,7 +51,6 @@ function ToDoBody() {
         {/* 완료한 일 리스트 */}
         <div className='todo__list-done'>
           <ToDoItemList 
-            title={ '완료' }
             valueList={ valueList } 
             setValueList={ setValueList }
             checkedList={true}

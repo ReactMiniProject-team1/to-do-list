@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect} from "react"
+import React, { useState, useRef } from "react"
 import styled from "styled-components"
 
 const InputContainer = styled.div`
@@ -49,12 +49,6 @@ function ToDoInput({ valueList, setValueList }) {
   // =============================================
   const onKeyDownInput = (e) => {
     if (e.nativeEvent.isComposing) {
-      return;
-    }
-    if (value === '') {
-      return;
-    }
-    if (e.key === 'Enter' && e.shiftKey) {
       return;
     } else if (e.key === 'Enter') {
       intoTheList(e);
