@@ -10,8 +10,13 @@ const ToDoBodyContainer = styled.div`
 
   .todo__list-done {
     margin-top: 3rem;
+    margin-left: -25px;
+    margin-right: -25px;
+    padding-left: 25px;
+    padding-right: 25px;
     background-color: #f7f7f7;
   }
+  
   .todo__item-value-checked {
     margin-left: 1rem;
     margin-right: 1rem;
